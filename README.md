@@ -19,7 +19,9 @@ Or install it yourself as:
 ## Usage
 
 For example:
+
     # Convert 100 Euro to US Dollars
+
     CurrencyConverter.exchange("EUR", "USD", 100)
 
 ## Contributing
