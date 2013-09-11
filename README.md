@@ -1,4 +1,4 @@
-# Currency
+# CurrencyConverter
 
 Google provides a web site to converts currencies using exchange rates but they have not provided any API for ruby. This is a small library that converts currencies exchange rate. You can convert currencies directly through this library.
 
