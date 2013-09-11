@@ -48,7 +48,7 @@ module CurrencyConverter
     #
     # Returns true if currency is valid
     def valid_currency?
-      CURRENCIES.has_key?(from_currency) && CURRENCIES.has_key?(to_currency)
+      CurrencyConverter::CURRENCIES.has_key?(from_currency) && CurrencyConverter::CURRENCIES.has_key?(to_currency)
     end
   end
 end
