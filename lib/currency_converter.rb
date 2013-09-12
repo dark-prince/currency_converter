@@ -1,3 +1,4 @@
+require "currency_converter/exceptions"
 require "currency_converter/currencies"
 require "currency_converter/version"
 require "net/http"
@@ -22,9 +23,9 @@ module CurrencyConverter
     def exchange(from, to, fixnum)
       @from_currency = from.upcase.to_sym
       @to_currency = to.upcase.to_sym
-      raise StandardError, "Currency #{from_currency} or #{to_currency} is invalid" unless valid_currency?
+      validate_currency
       ex_rate = exchange_rate
-      raise StandardError, "Can't find any exchange rate" if ex_rate.nil?
+      validate_rate(ex_rate)
       value = "%.2f" % (ex_rate.to_f * fixnum).to_s
       value.to_f
     end
@@ -44,11 +45,15 @@ module CurrencyConverter
       raise StandardError, "Please check your internet connection"
     end
 
-    # Check if currency is valid
-    #
-    # Returns true if currency is valid
-    def valid_currency?
-      CurrencyConverter::CURRENCIES.has_key?(from_currency) && CurrencyConverter::CURRENCIES.has_key?(to_currency)
+    # Raise errors for invalid currencies.
+    def validate_currency
+      raise UnknownCurrency.new(from_currency) unless CurrencyConverter::CURRENCIES.has_key?(from_currency)
+      raise UnknownCurrency.new(to_currency) unless CurrencyConverter::CURRENCIES.has_key?(to_currency)
+    end
+
+    # Raise errors for missing data.
+    def validate_rate(rate)
+      raise MissingExchangeRate.new(from_currency, to_currency) if rate.to_f.zero?
     end
   end
 end
