@@ -18,11 +18,21 @@ Or install it yourself as:
 
 ## Usage
 
-For example:
-
-    # Convert 100 Euro to US Dollars
+To convert between two currencies:
 
     CurrencyConverter.exchange("EUR", "USD", 100)
+    => 132.89
+
+    CurrencyConverter.exchange("USD", "EUR", 100)
+    => 75.15
+
+To get the most recent exchange rate between two currencies:
+
+    CurrencyConverter.exchange("EUR", "USD", 1)
+    => 1.33
+
+    CurrencyConverter.exchange("USD", "EUR", 1)
+    => 0.75
 
 ## Contributing
 
