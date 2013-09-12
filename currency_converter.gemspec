@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.email                  = ["diganta@circarconsulting.com"]
   spec.description            = %q{Google provides a web site to converts currencies using exchange rates but they have not provided any API for ruby. This is a small library that converts currencies exchange rate. You can convert currencies directly through this library.}
   spec.summary                = %q{Google provides a web site to converts currencies using exchange rates but they have not provided any API for ruby. This is a small library that converts currencies exchange rate. You can convert currencies directly through this library.}
-  spec.homepage               = "https://github.com/diganta/currency"
+  spec.homepage               = "https://github.com/diganta/currency_converter"
   
   spec.files                  = `git ls-files`.split($/)
   spec.executables            = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
