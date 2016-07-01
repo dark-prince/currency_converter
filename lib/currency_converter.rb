@@ -26,8 +26,7 @@ module CurrencyConverter
       validate_currency
       ex_rate = exchange_rate
       validate_rate(ex_rate)
-      value = "%.2f" % (ex_rate.to_f * fixnum).to_s
-      value.to_f
+      ex_rate.to_f * fixnum
     end
 
     private
