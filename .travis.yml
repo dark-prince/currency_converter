@@ -6,8 +6,11 @@ rvm:
   - 2.1.1
   - 2.2
 
+before_install:
+  - gem install bundler
+
 install:
-  - "travis_retry bundle install"
+  - travis_retry bundle install
 
 script:
-  - "bundle exec rake spec"
+  - bundle exec rake spec
