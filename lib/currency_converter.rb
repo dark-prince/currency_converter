@@ -1,7 +1,8 @@
-require "currency_converter/exceptions"
-require "currency_converter/currencies"
-require "currency_converter/version"
-require "net/http"
+require 'currency_converter/exceptions'
+require 'currency_converter/currencies'
+require 'currency_converter/version'
+require 'net/http'
+require 'nokogiri'
 
 module CurrencyConverter
   class << self
@@ -23,9 +24,13 @@ module CurrencyConverter
     def exchange(from, to, fixnum)
       @from_currency = from.upcase.to_sym
       @to_currency = to.upcase.to_sym
+
       validate_currency
+
       ex_rate = exchange_rate
+
       validate_rate(ex_rate)
+
       ex_rate.to_f * fixnum
     end
 
@@ -33,12 +38,16 @@ module CurrencyConverter
 
     # Returns the Float value of rate or nil
     def exchange_rate
-      http = Net::HTTP.new("www.google.com", 80)
-      url = "/finance/converter?a=1&from=#{from_currency.to_s.upcase}&to=#{to_currency.to_s.upcase}"
+      http = Net::HTTP.new('themoneyconverter.com', 80)
+      url = "/CurrencyConverter.aspx?from=#{from_currency.to_s.upcase}&to=#{to_currency.to_s.upcase}"
       response = http.get(url)
-      result = response.body
-      regexp = Regexp.new("(\\d+\\.{0,1}\\d*)\\s+#{to_currency}")
+
+      doc = Nokogiri::HTML(response.body)
+      result = doc.css('div.cc-rate textarea').first.text
+
+      regexp = Regexp.new('(\\d+(?:\\.\\d+)?)')
       regexp.match result
+
       return $1
     rescue Timeout::Error
       raise StandardError, "Please check your internet connection"
