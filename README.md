@@ -1,6 +1,6 @@
 # CurrencyConverter
 
-Simple Ruby API to get exchange rates from currencies using themoneyconverter.com website. You can convert currencies directly through this library.
+Simple Ruby API to get exchange rates from currencies using Google finance currency converter and Yahoo finance currency converter. You can convert currencies directly through this library.
 
 ## Installation
 
@@ -18,20 +18,22 @@ Or install it yourself as:
 
 ## Usage
 
-To convert between two currencies:
+To convert between two currencies using Google finance currency converter:
 
-    CurrencyConverter.exchange("EUR", "USD", 100)
+    currency_converter = CurrencyConverter::Google.new
+    currency_converter.exchange("EUR", "USD", 100)
     => 132.89
 
-    CurrencyConverter.exchange("USD", "EUR", 100)
+    currency_converter.exchange("USD", "EUR", 100)
     => 75.15
 
-To get the most recent exchange rate between two currencies:
+To convert between two currencies using Yahoo finance currency converter:
 
-    CurrencyConverter.exchange("EUR", "USD", 1)
+    currency_converter = CurrencyConverter::Yahoo.new
+    currency_converter.exchange("EUR", "USD", 1)
     => 1.33
 
-    CurrencyConverter.exchange("USD", "EUR", 1)
+    currency_converter.exchange("USD", "EUR", 1)
     => 0.75
 
 ## Contributing
