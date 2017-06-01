@@ -38,12 +38,14 @@ module CurrencyConverter
 
     # Returns the Float value of rate or nil
     def exchange_rate
-      http = Net::HTTP.new('themoneyconverter.com', 80)
+      http = Net::HTTP.new('themoneyconverter.com', 443)
+      http.use_ssl = true
+
       url = "/CurrencyConverter.aspx?from=#{from_currency.to_s.upcase}&to=#{to_currency.to_s.upcase}"
       response = http.get(url)
 
       doc = Nokogiri::HTML(response.body)
-      result = doc.css('div.cc-rate textarea').first.text
+      result = doc.css('div.cc-rate div#cc-ratebox').first.text
 
       regexp = Regexp.new('(\\d+(?:\\.\\d+)?)')
       regexp.match result
