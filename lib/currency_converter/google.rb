@@ -19,8 +19,8 @@ module CurrencyConverter
     #
     # @example
     # currency_converter = CurrencyConverter::Google.new
-    # currency_converter.exchange("USD", "EUR", 100)
-    # currency_converter.exchange("USD", "INR", 100)
+    # currency_converter.exchange('USD', 'EUR', 100)
+    # currency_converter.exchange('USD', 'INR', 100)
     def exchange(from, to, fixnum)
       @from_currency = from.upcase.to_sym
       @to_currency = to.upcase.to_sym
@@ -52,16 +52,14 @@ module CurrencyConverter
 
       return $1
     rescue Timeout::Error
-      raise StandardError, "Please check your internet connection"
+      raise StandardError, 'Please check your internet connection'
     end
 
-    # Raise errors for invalid currencies.
     def validate_currency
       raise CurrencyConverter::UnknownCurrency.new(from_currency) unless CurrencyConverter::CURRENCIES.has_key?(from_currency)
       raise CurrencyConverter::UnknownCurrency.new(to_currency) unless CurrencyConverter::CURRENCIES.has_key?(to_currency)
     end
 
-    # Raise errors for missing data.
     def validate_rate(rate)
       raise CurrencyConverter::MissingExchangeRate.new(from_currency, to_currency) if rate.to_f.zero?
     end
