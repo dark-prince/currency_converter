@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/currency_converter.svg)](http://badge.fury.io/rb/currency_converter) [![Build Status](https://travis-ci.org/dark-prince/currency_converter.svg)](https://travis-ci.org/dark-prince/currency_converter) [![Code Climate](https://codeclimate.com/github/dark-prince/currency_converter.png)](https://codeclimate.com/github/dark-prince/currency_converter) [![Dependency Status](https://gemnasium.com/dark-prince/currency_converter.svg)](https://gemnasium.com/dark-prince/currency_converter) [![License](http://img.shields.io/license/MIT.png)](http://opensource.org/licenses/MIT) [![Coverage Status](https://coveralls.io/repos/dark-prince/currency_converter/badge.png?branch=master)](https://coveralls.io/r/dark-prince/currency_converter?branch=master)
 
-Simple Ruby API to get exchange rates from currencies using Google finance currency converter and Yahoo finance currency converter. You can convert currencies directly through this library.
+Simple Ruby API to get exchange rates from currencies using Yahoo finance currency converter and XE currency converter. You can convert currencies directly through this library.
 
 ## Installation
 
@@ -20,9 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-To convert between two currencies using Google finance currency converter:
+To convert between two currencies using XE currency converter:
 
-    currency_converter = CurrencyConverter::Google.new
+    currency_converter = CurrencyConverter::XE.new
     currency_converter.exchange('EUR', 'USD', 100)
     => 132.89
 

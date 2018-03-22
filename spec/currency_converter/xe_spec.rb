@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CurrencyConverter::Google do
+describe CurrencyConverter::XE do
   let(:currency_converter) { described_class.new }
 
   context '#exchange' do

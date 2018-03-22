@@ -4,7 +4,7 @@ require 'net/http'
 require 'nokogiri'
 
 module CurrencyConverter
-  class Google
+  class XE
     # Returns the Symbol of 'from' currency
     attr_reader :from_currency
 
@@ -18,7 +18,7 @@ module CurrencyConverter
     # @return [amount]
     #
     # @example
-    # currency_converter = CurrencyConverter::Google.new
+    # currency_converter = CurrencyConverter::XE.new
     # currency_converter.exchange('USD', 'EUR', 100)
     # currency_converter.exchange('USD', 'INR', 100)
     def exchange(from, to, fixnum)
@@ -38,14 +38,13 @@ module CurrencyConverter
 
     # Returns the Float value of rate or nil
     def exchange_rate
-      http = Net::HTTP.new('themoneyconverter.com', 443)
-      http.use_ssl = true
+      http = Net::HTTP.new('www.xe.com', 80)
+      url = "/currencyconverter/convert/?Amount=1&From=#{from_currency.to_s.upcase}&To=#{to_currency.to_s.upcase}"
 
-      url = "/CurrencyConverter.aspx?from=#{from_currency.to_s.upcase}&to=#{to_currency.to_s.upcase}"
       response = http.get(url)
 
       doc = Nokogiri::HTML(response.body)
-      result = doc.css('div.cc-rate div#cc-ratebox').first.text
+      result = doc.css('span.uccResultAmount').text
 
       regexp = Regexp.new('(\\d+(?:\\.\\d+)?)')
       regexp.match result

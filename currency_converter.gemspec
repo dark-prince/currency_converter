@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   
   spec.authors                = ['Diganta Mandal']
   spec.email                  = ['urs.diganta@gmail.com']
-  spec.description            = %q{Google provides a web site to converts currencies using exchange rates but they have not provided any API for ruby. This is a small library that converts currencies exchange rate. You can convert currencies directly through this library.}
-  spec.summary                = %q{Google provides a web site to converts currencies using exchange rates but they have not provided any API for ruby. This is a small library that converts currencies exchange rate. You can convert currencies directly through this library.}
+  spec.description            = %q{Simple Ruby API to get exchange rates from currencies using Yahoo finance currency converter and XE currency converter. You can convert currencies directly through this library.}
+  spec.summary                = %q{Simple Ruby API to get exchange rates from currencies using Yahoo finance currency converter and XE currency converter. You can convert currencies directly through this library.}
   spec.homepage               = 'https://github.com/dark-prince/currency_converter'
   
   spec.files                  = `git ls-files`.split($/)
