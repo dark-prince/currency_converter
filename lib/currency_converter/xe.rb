@@ -38,10 +38,12 @@ module CurrencyConverter
 
     # Returns the Float value of rate or nil
     def exchange_rate
-      http = Net::HTTP.new('www.xe.com', 80)
       url = "/currencyconverter/convert/?Amount=1&From=#{from_currency.to_s.upcase}&To=#{to_currency.to_s.upcase}"
+      uri = URI.parse('https://www.xe.com')
 
-      response = http.get(url)
+      request = Net::HTTP.new(uri.host, uri.port)
+      request.use_ssl = true
+      response = request.get(url)
 
       doc = Nokogiri::HTML(response.body)
       result = doc.css('span.uccResultAmount').text
